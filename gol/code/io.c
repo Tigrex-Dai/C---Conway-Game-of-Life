@@ -1,5 +1,6 @@
 #include "io.h"
 
+
 void affiche_trait (int c){
 	int i;
 	for (i=0; i<c; ++i) printf ("|---");
@@ -32,6 +33,7 @@ void efface_grille (grille g){
 }
 
 void debut_jeu(grille *g, grille *gc){
+	int vieillissement = 0;
 	char c = getchar(); 
 	while (c != 'q') // touche 'q' pour quitter
 	{ 
@@ -41,6 +43,28 @@ void debut_jeu(grille *g, grille *gc){
 				evolue(g,gc);
 				efface_grille(*g);
 				affiche_grille(*g);
+				break;
+			}
+			case 'n' :
+			{ // touche "n" pour renouveller grille
+				char grille[100];
+                printf("\r\e[0KNouvelle grille a charger : \n");
+                scanf("%s", grille);
+
+				libere_grille(g);
+				libere_grille(gc);
+
+				init_grille_from_file(grille, g);
+				alloue_grille(g->nbl, g->nbc, gc);
+                  
+				temps_evolution = 0;
+				affiche_grille(*g);
+				break;				
+			}
+			case 'v' :
+			{ // touche "v" pour activer vieillissement
+				vieillissement += 1;
+				vieillissement %= 2;
 				break;
 			}
 			default : 

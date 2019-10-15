@@ -14,6 +14,18 @@ int compte_voisins_vivants (int i, int j, grille g){
 	return v; 
 }
 
+int compte_voisins_vivants_nc(int i, int j, grille g) {
+  int v = 0;
+	for(int k = max(0,i-1);k <= min(g.nbl-1,i+1);k++){
+		for(int l = max(0,j-1);l <= min(g.nbc-1,j+1);l++){
+			if((k != i || l != j) && est_vivante(k,l,g)){
+				v++;			
+			}
+		}
+	}
+  return v;
+}
+
 void evolue (grille *g, grille *gc){
 	copie_grille (*g,*gc); // copie temporaire de la grille
 	int i,j,l=g->nbl, c = g->nbc,v;
