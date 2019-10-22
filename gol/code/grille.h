@@ -7,7 +7,7 @@
 
 // structure grille : nombre de lignes, nombre de colonnes, tableau de tableau de cellules
 typedef struct {int nbl; int nbc; int** cellules;} grille;
- 
+
 // alloue une grille de taille l*c, et initialise toutes les cellules à mortes
 void alloue_grille (int l, int c, grille* g);
 
