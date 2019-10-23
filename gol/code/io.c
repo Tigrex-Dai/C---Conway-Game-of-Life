@@ -8,21 +8,30 @@ void affiche_trait (int c){
 	return;
 }
 
-void affiche_ligne (int c, int* ligne){
+void affiche_ligne (int c, int* ligne, int vieillissement){
 	int i;
-	for (i=0; i<c; ++i) 
-		if (ligne[i] == 0 ) printf ("|   "); else printf ("| O ");
-	printf("|\n");
+	if (vieillissement)
+	{
+		 for (i=0; i<c; ++i) 
+			if (ligne[i] == 0 ) printf ("|   "); else printf ("| %d ",ligne[i]);
+		 printf("|\n");
+	}
+	else
+	{
+		for (i=0; i<c; ++i) 
+			if (ligne[i] == 0 ) printf ("|   "); else printf ("| O ");
+		printf("|\n");
+	}
 	return;
 }
 
-void affiche_grille (grille g){
+void affiche_grille (grille g, int vieillissement){
 	int i, l=g.nbl, c=g.nbc;
 	printf("Temps d'evolution : %d", temps_evolution);
 	printf("\n");
 	affiche_trait(c);
 	for (i=0; i<l; ++i) {
-		affiche_ligne(c, g.cellules[i]);
+		affiche_ligne(c, g.cellules[i],vieillissement);
 		affiche_trait(c);
 	}	
 	printf("\n"); 
@@ -48,7 +57,7 @@ void debut_jeu(grille *g, grille *gc){
 				temps_evolution++;
 				evolue(g,gc,compte_voisins_vivants);
 				efface_grille(*g);
-				affiche_grille(*g);
+				affiche_grille(*g,vieillissement);
 				break;
 			}
 			case 'n' :
@@ -64,7 +73,7 @@ void debut_jeu(grille *g, grille *gc){
 				alloue_grille(g->nbl, g->nbc, gc);
                   
 				temps_evolution = 0;
-				affiche_grille(*g);
+				affiche_grille(*g,vieillissement);
 				break;				
 			}
 			case 'c' :
@@ -83,6 +92,8 @@ void debut_jeu(grille *g, grille *gc){
 			{ // touche "v" pour activer vieillissement
 				vieillissement += 1;
 				vieillissement %= 2;
+				efface_grille (*g);
+				affiche_grille (*g,vieillissement);
 				break;
 			}
 			default : 
