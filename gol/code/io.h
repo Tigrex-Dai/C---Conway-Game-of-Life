@@ -20,4 +20,7 @@ void efface_grille (grille g);
 // debute le jeu
 void debut_jeu(grille *g, grille *gc);
 
+// garde le temps d'exécution
+extern int temps_evolution;
+
 #endif

@@ -93,3 +93,5 @@ void debut_jeu(grille *g, grille *gc){
 	}
 	return;	
 }
+
+int temps_evolution=0;
