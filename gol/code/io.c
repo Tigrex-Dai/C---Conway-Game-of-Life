@@ -18,6 +18,7 @@ void affiche_ligne (int c, int* ligne){
 
 void affiche_grille (grille g){
 	int i, l=g.nbl, c=g.nbc;
+	printf("Temps d'evolution : %d", temps_evolution);
 	printf("\n");
 	affiche_trait(c);
 	for (i=0; i<l; ++i) {
@@ -44,7 +45,8 @@ void debut_jeu(grille *g, grille *gc){
 		switch (c) {
 			case '\n' : 
 			{ // touche "entree" pour évoluer
-				evolue(g,gc);
+				temps_evolution++;
+				evolue(g,gc,compte_voisins_vivants);
 				efface_grille(*g);
 				affiche_grille(*g);
 				break;
@@ -61,7 +63,7 @@ void debut_jeu(grille *g, grille *gc){
 				init_grille_from_file(grille, g);
 				alloue_grille(g->nbl, g->nbc, gc);
                   
-				//*temps_evolution = 0;
+				temps_evolution = 0;
 				affiche_grille(*g);
 				break;				
 			}
@@ -69,11 +71,11 @@ void debut_jeu(grille *g, grille *gc){
 			{ // touch "c" pour (de)activer bord-cyclique
 				if (compte_voisins_vivants == compte_voisins_vivants_c){
 					compte_voisins_vivants = compte_voisins_vivants_nc;
-					printf("Bord est maintenant non-cyclique");
+					printf("\nBord est maintenant non-cyclique\n");
 				}
                 else{
 					compte_voisins_vivants = compte_voisins_vivants_c;
-					printf("Bord est maintenant cyclique");
+					printf("\nBord est maintenant cyclique\n");
 				}
                 break;
 			}
