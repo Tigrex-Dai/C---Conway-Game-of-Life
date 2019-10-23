@@ -35,7 +35,6 @@ void efface_grille (grille g){
 void debut_jeu(grille *g, grille *gc){
 	int (*compte_voisins_vivants)(int,int,grille);
 	compte_voisins_vivants=compte_voisins_vivants_c;
-	char *mode="Bord est maintenant cyclique";
 	
 	int vieillissement = 0;
 	
@@ -70,11 +69,11 @@ void debut_jeu(grille *g, grille *gc){
 			{ // touch "c" pour (de)activer bord-cyclique
 				if (compte_voisins_vivants == compte_voisins_vivants_c){
 					compte_voisins_vivants = compte_voisins_vivants_nc;
-					mode="Bord est maintenant non-cyclique";
+					printf("Bord est maintenant non-cyclique");
 				}
                 else{
 					compte_voisins_vivants = compte_voisins_vivants_c;
-					mode="Bord est maintenant cyclique";
+					printf("Bord est maintenant cyclique");
 				}
                 break;
 			}

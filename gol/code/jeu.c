@@ -29,15 +29,14 @@ int compte_voisins_vivants_nc(int i, int j, grille g) {
   return v;
 }
 
-void evolue (grille *g, grille *gc){
-	int (*compte_voisins_vivants)(int,int,grille);
+void evolue (grille *g, grille *gc, int (*compte_voisins_vivants)(int,int,grille)){
 	copie_grille (*g,*gc); // copie temporaire de la grille
 	int i,j,l=g->nbl, c = g->nbc;
+	int v = compte_voisins_vivants (i, j, *gc);
 	for (i=0; i<l; i++)
 	{
 		for (j=0; j<c; ++j)
-		{
-			int v = compte_voisins_vivants (i, j, *gc);
+		{			
 			if (est_vivante(i,j,*g)) 
 			{ // evolution d'une cellule vivante
 				if ( v!=2 && v!= 3 ) set_morte(i,j,*g);

@@ -32,19 +32,14 @@ void init_grille_from_file (char * filename, grille* g){
 	int i,j,n,l,c,vivantes=0;
 	
 	fscanf(pfile, "%d", & l);
-	printf("%d\n",l);
 	fscanf(pfile, "%d", & c);
-	printf("%d\n",c);
 	
 	alloue_grille(l,c,g);
 	
 	fscanf(pfile, "%d", & vivantes);
-	printf("%d\n",vivantes);
 	for (n=0; n< vivantes; ++n){
 		fscanf(pfile, "%d", & i);
-		printf("%d\n",i);
 		fscanf(pfile, "%d", & j);
-		printf("%d\n",j);
 		set_vivante(i,j,*g);
 	}
 	
@@ -58,3 +53,7 @@ void copie_grille (grille gs, grille gd){
 	for (i=0; i<gs.nbl; ++i) for (j=0; j<gs.nbc; ++j) gd.cellules[i][j] = gs.cellules[i][j];
 	return;	
 }
+
+extern inline int est_vivante(int i, int j, grille g);
+extern inline void set_vivante(int i, int j, grille g);
+extern inline void set_morte(int i, int j, grille g);

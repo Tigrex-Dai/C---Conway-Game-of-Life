@@ -14,10 +14,8 @@ static inline int modulo(int i, int m) {return (i+m)%m;}
 int compte_voisins_vivants_c (int i, int j, grille g);
 // les bords sont non-cycliques.
 int compte_voisins_vivants_nc (int i, int j, grille g);
-// pointeur vers la fonction.
-extern int (*compte_voisins_vivants)(int,int,grille);
 
 // fait évoluer la grille g d'un pas de temps
-void evolue (grille *g, grille *gc);
+void evolue (grille *g, grille *gc,int (*compte_voisins_vivants)(int,int,grille));
 
 #endif
