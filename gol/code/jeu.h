@@ -1,5 +1,14 @@
+/**
+ * @file jeu.h
+ * @author DAI Yuquan
+ * @brief  Fichier entête du code source jeu.c
+ */
+
 #ifndef __JEU_H
 #define __JEU_H
+
+#define min(a,b) ((a) < (b) ? (a) : (b))
+#define max(a,b) ((a) > (b) ? (a) : (b))
 
 #include "grille.h"
 #include <stdio.h>

@@ -1,7 +1,14 @@
+/**
+ * @file io.c
+ * @author DAI Yuquan
+ */
+
 #include "io.h"
 
-
-
+/**
+ * @brief dessine une ligne de trait de cellules sur l'ecran
+ * @param c nombres de cellules
+ */
 void affiche_trait (int c){
 	int i;
 	for (i=0; i<c; ++i) printf ("|---");
@@ -9,6 +16,12 @@ void affiche_trait (int c){
 	return;
 }
 
+/**
+ * @brief dessine une ligne de cellules sur l'ecran
+ * @param c nombres de cellules
+ * @param ligne nombres de lignes
+ * @param vieillissement si true, on montre l'ages des cellules et non si false
+ */
 void affiche_ligne (int c, int* ligne, int vieillissement){
 	int i;
 	if (vieillissement)
@@ -26,6 +39,11 @@ void affiche_ligne (int c, int* ligne, int vieillissement){
 	return;
 }
 
+/**
+ * @brief affiche la grille
+ * @param g grille
+ * @param vieillissement si true, on montre l'ages des cellules et non si false
+ */
 void affiche_grille (grille g, int vieillissement){
 	int i, l=g.nbl, c=g.nbc;
 	printf("Temps d'evolution : %d", temps_evolution);
@@ -42,25 +60,32 @@ void affiche_grille (grille g, int vieillissement){
 	return;
 }
 
+/**
+ * @brief efface la grille
+ * @param g grille
+ */
 void efface_grille (grille g){
 	//printf("\n\e[%dA",g.nbl*2 + 5); 
 	printf("\033[2J");
 }
 
+/**
+ * @brief debute le jeu
+ * @param g grille
+ * @param gc grille
+ */
 void debut_jeu(grille *g, grille *gc){
 	int (*compte_voisins_vivants)(int,int,grille);
 	compte_voisins_vivants=compte_voisins_vivants_c;
 	
 	int vieillissement = 0;
 	
-	//system("stty -echo");
 	int c = getchar(); 
 	while (c != 'q') // touche 'q' pour quitter
 	{ 
 		switch (c) {
 			case '\n' : 
 			{ // touche "entree" pour évoluer
-				//system("stty echo");
 				temps_evolution++;
 				evolue(g,gc,compte_voisins_vivants,vieillissement);
 				efface_grille(*g);
@@ -69,7 +94,6 @@ void debut_jeu(grille *g, grille *gc){
 			}
 			case 'n' :
 			{ // touche "n" pour renouveller grille
-				//system("stty echo");
 				char grille[100];
                 printf("\r\e[0KNouvelle grille a charger : \n");
                 scanf("%s", grille);
@@ -86,7 +110,6 @@ void debut_jeu(grille *g, grille *gc){
 			}
 			case 'c' :
 			{ // touch "c" pour (de)activer bord-cyclique
-				//system("stty echo");
 				if (compte_voisins_vivants == compte_voisins_vivants_c){
 					compte_voisins_vivants = compte_voisins_vivants_nc;
 					//printf("\nBord est maintenant non-cyclique\n");
@@ -99,7 +122,6 @@ void debut_jeu(grille *g, grille *gc){
 			}
 			case 'v' :
 			{ // touche "v" pour (de)activer vieillissement
-				//system("stty echo");
 				vieillissement += 1;
 				vieillissement %= 2;
 				efface_grille (*g);
@@ -108,16 +130,14 @@ void debut_jeu(grille *g, grille *gc){
 			}
 			default : 
 			{ // touche non traitée
-				//system("stty echo");
 				//printf("\n\e[1A");
 				break;
 			}
 		}
-		//system("stty -echo");
 		c = getchar(); 
 	}
-	//system("stty echo");
 	return;	
 }
 
+/** @brief on garde le temps d'evolution ici */
 int temps_evolution=0;

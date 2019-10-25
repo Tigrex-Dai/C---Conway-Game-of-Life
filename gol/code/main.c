@@ -1,3 +1,8 @@
+/**
+ * @file main.c
+ * @author DAI Yuquan
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -6,6 +11,11 @@
 #include "io.h"
 #include "jeu.h"
 
+/**
+ * @brief execute le jeu
+ * @param argv repertoire du fichier avec la grille
+ * @return 0 si l'utilisateur a appuye sur 'q'
+ */
 
 int main (int argc, char ** argv) {
 	

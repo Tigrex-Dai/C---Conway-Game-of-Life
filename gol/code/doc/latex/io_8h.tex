@@ -1,0 +1,129 @@
+\hypertarget{io_8h}{}\section{Référence du fichier io.\+h}
+\label{io_8h}\index{io.\+h@{io.\+h}}
+
+
+Fichier entête du code source \hyperlink{io_8c}{io.\+c}.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}grille.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}jeu.\+h\char`\"{}}\newline
+Graphe des dépendances par inclusion de io.\+h\+:
+% FIG 0
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:
+% FIG 1
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{io_8h_a634cf584c380ce221d5d4199f3e813bd}{affiche\+\_\+trait} (int c)
+\begin{DoxyCompactList}\small\item\em dessine une ligne de trait de cellules sur l\textquotesingle{}ecran \end{DoxyCompactList}\item 
+void \hyperlink{io_8h_a64db5c037945ae6d82896b085ab3c0c8}{affiche\+\_\+ligne} (int c, int $\ast$ligne, int vieillissement)
+\begin{DoxyCompactList}\small\item\em dessine une ligne de cellules sur l\textquotesingle{}ecran \end{DoxyCompactList}\item 
+void \hyperlink{io_8h_a3f2921859f154a60f5809eb479996d42}{affiche\+\_\+grille} (\hyperlink{structgrille}{grille} g, int vieillissement)
+\begin{DoxyCompactList}\small\item\em affiche la grille \end{DoxyCompactList}\item 
+void \hyperlink{io_8h_ab36a6f8957cd3e682119007836ce6ad5}{efface\+\_\+grille} (\hyperlink{structgrille}{grille} g)
+\begin{DoxyCompactList}\small\item\em efface la grille \end{DoxyCompactList}\item 
+void \hyperlink{io_8h_a88493b3c55828670e47150a95ed7db5b}{debut\+\_\+jeu} (\hyperlink{structgrille}{grille} $\ast$g, \hyperlink{structgrille}{grille} $\ast$gc)
+\begin{DoxyCompactList}\small\item\em debute le jeu \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{io_8h_a0bb2c810f4d06f86aaa032da354a92e2}\label{io_8h_a0bb2c810f4d06f86aaa032da354a92e2}} 
+int \hyperlink{io_8h_a0bb2c810f4d06f86aaa032da354a92e2}{temps\+\_\+evolution}
+\begin{DoxyCompactList}\small\item\em on garde le temps d\textquotesingle{}evolution ici \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Fichier entête du code source \hyperlink{io_8c}{io.\+c}. 
+
+\begin{DoxyAuthor}{Auteur}
+D\+AI Yuquan 
+\end{DoxyAuthor}
+
+
+\subsection{Documentation des fonctions}
+\mbox{\Hypertarget{io_8h_a3f2921859f154a60f5809eb479996d42}\label{io_8h_a3f2921859f154a60f5809eb479996d42}} 
+\index{io.\+h@{io.\+h}!affiche\+\_\+grille@{affiche\+\_\+grille}}
+\index{affiche\+\_\+grille@{affiche\+\_\+grille}!io.\+h@{io.\+h}}
+\subsubsection{\texorpdfstring{affiche\+\_\+grille()}{affiche\_grille()}}
+{\footnotesize\ttfamily void affiche\+\_\+grille (\begin{DoxyParamCaption}\item[{\hyperlink{structgrille}{grille}}]{g,  }\item[{int}]{vieillissement }\end{DoxyParamCaption})}
+
+
+
+affiche la grille 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em g} & grille \\
+\hline
+{\em vieillissement} & si true, on montre l\textquotesingle{}ages des cellules et non si false \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{io_8h_a64db5c037945ae6d82896b085ab3c0c8}\label{io_8h_a64db5c037945ae6d82896b085ab3c0c8}} 
+\index{io.\+h@{io.\+h}!affiche\+\_\+ligne@{affiche\+\_\+ligne}}
+\index{affiche\+\_\+ligne@{affiche\+\_\+ligne}!io.\+h@{io.\+h}}
+\subsubsection{\texorpdfstring{affiche\+\_\+ligne()}{affiche\_ligne()}}
+{\footnotesize\ttfamily void affiche\+\_\+ligne (\begin{DoxyParamCaption}\item[{int}]{c,  }\item[{int $\ast$}]{ligne,  }\item[{int}]{vieillissement }\end{DoxyParamCaption})}
+
+
+
+dessine une ligne de cellules sur l\textquotesingle{}ecran 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em c} & nombres de cellules \\
+\hline
+{\em ligne} & nombres de lignes \\
+\hline
+{\em vieillissement} & si true, on montre l\textquotesingle{}ages des cellules et non si false \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{io_8h_a634cf584c380ce221d5d4199f3e813bd}\label{io_8h_a634cf584c380ce221d5d4199f3e813bd}} 
+\index{io.\+h@{io.\+h}!affiche\+\_\+trait@{affiche\+\_\+trait}}
+\index{affiche\+\_\+trait@{affiche\+\_\+trait}!io.\+h@{io.\+h}}
+\subsubsection{\texorpdfstring{affiche\+\_\+trait()}{affiche\_trait()}}
+{\footnotesize\ttfamily void affiche\+\_\+trait (\begin{DoxyParamCaption}\item[{int}]{c }\end{DoxyParamCaption})}
+
+
+
+dessine une ligne de trait de cellules sur l\textquotesingle{}ecran 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em c} & nombres de cellules \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{io_8h_a88493b3c55828670e47150a95ed7db5b}\label{io_8h_a88493b3c55828670e47150a95ed7db5b}} 
+\index{io.\+h@{io.\+h}!debut\+\_\+jeu@{debut\+\_\+jeu}}
+\index{debut\+\_\+jeu@{debut\+\_\+jeu}!io.\+h@{io.\+h}}
+\subsubsection{\texorpdfstring{debut\+\_\+jeu()}{debut\_jeu()}}
+{\footnotesize\ttfamily void debut\+\_\+jeu (\begin{DoxyParamCaption}\item[{\hyperlink{structgrille}{grille} $\ast$}]{g,  }\item[{\hyperlink{structgrille}{grille} $\ast$}]{gc }\end{DoxyParamCaption})}
+
+
+
+debute le jeu 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em g} & grille \\
+\hline
+{\em gc} & grille \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{io_8h_ab36a6f8957cd3e682119007836ce6ad5}\label{io_8h_ab36a6f8957cd3e682119007836ce6ad5}} 
+\index{io.\+h@{io.\+h}!efface\+\_\+grille@{efface\+\_\+grille}}
+\index{efface\+\_\+grille@{efface\+\_\+grille}!io.\+h@{io.\+h}}
+\subsubsection{\texorpdfstring{efface\+\_\+grille()}{efface\_grille()}}
+{\footnotesize\ttfamily void efface\+\_\+grille (\begin{DoxyParamCaption}\item[{\hyperlink{structgrille}{grille}}]{g }\end{DoxyParamCaption})}
+
+
+
+efface la grille 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em g} & grille \\
+\hline
+\end{DoxyParams}

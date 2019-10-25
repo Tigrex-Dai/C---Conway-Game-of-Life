@@ -1,8 +1,17 @@
+/**
+ * @file jeu.c
+ * @author DAI Yuquan
+ */
+
 #include "jeu.h"
 
-#define min(a,b) ((a) < (b) ? (a) : (b))
-#define max(a,b) ((a) > (b) ? (a) : (b))
-
+/**
+ * @brief compte le nombre de voisins vivants de la cellule (i,j) avec bords cycliques
+ * @param i position i
+ * @param j position j
+ * @param g grille
+ * @return v le nombre de voisins vivants de la cellule (i, j)
+ */
 int compte_voisins_vivants_c (int i, int j, grille g){
 	int v = 0, l=g.nbl, c = g.nbc;
 	v+= est_vivante(modulo(i-1,l),modulo(j-1,c),g);
@@ -17,6 +26,13 @@ int compte_voisins_vivants_c (int i, int j, grille g){
 	return v; 
 }
 
+/**
+ * @brief compte le nombre de voisins vivants de la cellule (i,j) sans bords cycliques
+ * @param i position i
+ * @param j position j
+ * @param g grille
+ * @return v le nombre de voisins vivants de la cellule (i, j)
+ */
 int compte_voisins_vivants_nc(int i, int j, grille g) {
 	int v = 0;
 	for(int k = max(0,i-1);k <= min(g.nbl-1,i+1);k++){
@@ -29,6 +45,13 @@ int compte_voisins_vivants_nc(int i, int j, grille g) {
   return v;
 }
 
+/**
+ * @brief fait evoluer la grille g d'un pas de temps
+ * @param g grille
+ * @param gc grille
+ * @param (*compte_voisins_vivants)(int,int,grille) pointeur vers une fonction
+ * @param vieillissement une cellule meurt de viellesse quand son âge dépasse 8 pas de temps
+ */
 void evolue (grille *g, grille *gc, int (*compte_voisins_vivants)(int,int,grille),int vieillissement){
 	copie_grille (*g,*gc); // copie temporaire de la grille
 	int i,j,l=g->nbl, c = g->nbc;

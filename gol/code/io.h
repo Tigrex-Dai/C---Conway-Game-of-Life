@@ -1,10 +1,15 @@
+/**
+ * @file   io.h
+ * @author DAI Yuquan
+ * @brief  Fichier entête du code source io.c
+ */
+
 #ifndef __IO_H
 #define __IO_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <termios.h>
 #include "grille.h"
 #include "jeu.h"
 

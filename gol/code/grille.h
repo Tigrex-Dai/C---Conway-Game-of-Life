@@ -1,3 +1,9 @@
+/**
+ * @file   grille.h
+ * @author DAI Yuquan
+ * @brief  Fichier entête du code source grille.c
+ */
+
 #ifndef __GRILLE_H
 #define __GRILLE_H
 
@@ -6,7 +12,14 @@
 #include <assert.h>
 
 // structure grille : nombre de lignes, nombre de colonnes, tableau de tableau de cellules
-typedef struct {int nbl; int nbc; int** cellules;} grille;
+/**
+ * @brief structure grille: le type principal du jeu, qui contient informations sur le tableau de cellules
+ */
+typedef struct {
+	int nbl;/**< nombre de lignes */
+	int nbc; /**< nombre de colonnes */
+	int** cellules;/**< tableau de tableau de cellules */
+	} grille;
 
 // alloue une grille de taille l*c, et initialise toutes les cellules à mortes
 void alloue_grille (int l, int c, grille* g);

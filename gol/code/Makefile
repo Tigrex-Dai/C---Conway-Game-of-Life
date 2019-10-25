@@ -1,3 +1,4 @@
+all = main.c grille.c io.c jeu.c grille.h io.h jeu.h
 obj = grille.o io.o main.o jeu.o
 cc = gcc
 cflag = -Wall
@@ -19,3 +20,6 @@ jeu.o : jeu.c jeu.h grille.h
 	
 clean:
 	rm *.o main
+
+dist:
+	tar -c doc/ grilles/ $(all) doxyfile Makefile -f daiyuquan-GoL-ver2.4.tar.xz -z
