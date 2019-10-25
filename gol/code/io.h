@@ -2,6 +2,9 @@
 #define __IO_H
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <termios.h>
 #include "grille.h"
 #include "jeu.h"
 
@@ -22,5 +25,7 @@ void debut_jeu(grille *g, grille *gc);
 
 // garde le temps d'exécution
 extern int temps_evolution;
+
+
 
 #endif

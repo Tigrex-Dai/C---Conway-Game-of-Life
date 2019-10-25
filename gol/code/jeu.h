@@ -2,7 +2,7 @@
 #define __JEU_H
 
 #include "grille.h"
-#include "stdio.h"
+#include <stdio.h>
 
 
 // modulo modifié pour traiter correctement les bords i=0 et j=0
@@ -16,6 +16,6 @@ int compte_voisins_vivants_c (int i, int j, grille g);
 int compte_voisins_vivants_nc (int i, int j, grille g);
 
 // fait évoluer la grille g d'un pas de temps
-void evolue (grille *g, grille *gc,int (*compte_voisins_vivants)(int,int,grille));
+void evolue (grille *g, grille *gc,int (*compte_voisins_vivants)(int,int,grille),int vieillissement);
 
 #endif

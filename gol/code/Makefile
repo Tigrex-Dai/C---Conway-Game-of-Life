@@ -6,16 +6,16 @@ main : $(obj)
 	$(cc) $(cflag) $(obj) -o main
 	
 main.o : main.c grille.h io.h jeu.h 
-	$(cc) $(cflag) -c main.c
+	$(cc) $(cflag) -c main.c 
 	
 grille.o : grille.c grille.h 
-	$(cc) $(cflag) -c grille.c
+	$(cc) $(cflag) -c grille.c 
 	
 io.o : io.c io.h grille.h jeu.h
-	$(cc) $(cflag) -c io.c
+	$(cc) $(cflag) -c io.c 
 
 jeu.o : jeu.c jeu.h grille.h
-	$(cc) $(cflag) -c jeu.c
+	$(cc) $(cflag) -c jeu.c 
 	
 clean:
 	rm *.o main

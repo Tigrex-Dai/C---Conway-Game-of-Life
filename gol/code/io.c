@@ -1,6 +1,7 @@
 #include "io.h"
 
 
+
 void affiche_trait (int c){
 	int i;
 	for (i=0; i<c; ++i) printf ("|---");
@@ -35,11 +36,15 @@ void affiche_grille (grille g, int vieillissement){
 		affiche_trait(c);
 	}	
 	printf("\n"); 
+	printf("Enter---Evoluer | <q>---quitter\n");
+	printf("<n>---New Game | <c>---(de)activer bord-cyclique | <v>---(de)activer vieillissement\n");
+	printf("Entrez un des ces instructions----");
 	return;
 }
 
 void efface_grille (grille g){
-	printf("\n\e[%dA",g.nbl*2 + 5); 
+	//printf("\n\e[%dA",g.nbl*2 + 5); 
+	printf("\033[2J");
 }
 
 void debut_jeu(grille *g, grille *gc){
@@ -48,20 +53,23 @@ void debut_jeu(grille *g, grille *gc){
 	
 	int vieillissement = 0;
 	
-	char c = getchar(); 
+	//system("stty -echo");
+	int c = getchar(); 
 	while (c != 'q') // touche 'q' pour quitter
 	{ 
 		switch (c) {
 			case '\n' : 
 			{ // touche "entree" pour évoluer
+				//system("stty echo");
 				temps_evolution++;
-				evolue(g,gc,compte_voisins_vivants);
+				evolue(g,gc,compte_voisins_vivants,vieillissement);
 				efface_grille(*g);
 				affiche_grille(*g,vieillissement);
 				break;
 			}
 			case 'n' :
 			{ // touche "n" pour renouveller grille
+				//system("stty echo");
 				char grille[100];
                 printf("\r\e[0KNouvelle grille a charger : \n");
                 scanf("%s", grille);
@@ -78,18 +86,20 @@ void debut_jeu(grille *g, grille *gc){
 			}
 			case 'c' :
 			{ // touch "c" pour (de)activer bord-cyclique
+				//system("stty echo");
 				if (compte_voisins_vivants == compte_voisins_vivants_c){
 					compte_voisins_vivants = compte_voisins_vivants_nc;
-					printf("\nBord est maintenant non-cyclique\n");
+					//printf("\nBord est maintenant non-cyclique\n");
 				}
                 else{
 					compte_voisins_vivants = compte_voisins_vivants_c;
-					printf("\nBord est maintenant cyclique\n");
+					//printf("\nBord est maintenant cyclique\n");
 				}
                 break;
 			}
 			case 'v' :
-			{ // touche "v" pour activer vieillissement
+			{ // touche "v" pour (de)activer vieillissement
+				//system("stty echo");
 				vieillissement += 1;
 				vieillissement %= 2;
 				efface_grille (*g);
@@ -98,12 +108,15 @@ void debut_jeu(grille *g, grille *gc){
 			}
 			default : 
 			{ // touche non traitée
-				printf("\n\e[1A");
+				//system("stty echo");
+				//printf("\n\e[1A");
 				break;
 			}
 		}
+		//system("stty -echo");
 		c = getchar(); 
 	}
+	//system("stty echo");
 	return;	
 }
 
