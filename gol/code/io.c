@@ -27,13 +27,17 @@ void affiche_ligne (int c, int* ligne, int vieillissement){
 	if (vieillissement)
 	{
 		 for (i=0; i<c; ++i) 
-			if (ligne[i] == 0 ) printf ("|   "); else printf ("| %d ",ligne[i]);
+			if (ligne[i] == 0 ) printf("|   ");
+			else if (ligne[i] == -1) printf("| X ");
+			else printf("| %d ",ligne[i]);
 		 printf("|\n");
 	}
 	else
 	{
 		for (i=0; i<c; ++i) 
-			if (ligne[i] == 0 ) printf ("|   "); else printf ("| O ");
+			if (ligne[i] == 0 ) printf ("|   ");
+			else if (ligne[i] == -1) printf("| X ");
+			else printf ("| O ");
 		printf("|\n");
 	}
 	return;

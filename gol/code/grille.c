@@ -50,7 +50,7 @@ void init_grille_from_file (char * filename, grille* g){
 	pfile = fopen(filename, "r");
 	assert (pfile != NULL);
 	
-	int i,j,n,l,c,vivantes=0;
+	int i,j,n,l,c,vivantes,nonvias=0;
 	
 	fscanf(pfile, "%d", & l);
 	fscanf(pfile, "%d", & c);
@@ -62,6 +62,13 @@ void init_grille_from_file (char * filename, grille* g){
 		fscanf(pfile, "%d", & i);
 		fscanf(pfile, "%d", & j);
 		set_vivante(i,j,*g);
+	}
+	
+	fscanf(pfile, "%d", & nonvias);
+	for (n=0; n< nonvias; ++n){
+		fscanf(pfile, "%d", & i);
+		fscanf(pfile, "%d", & j);
+		set_nonvia(i,j,*g);
 	}
 	
 	fclose (pfile);
@@ -80,5 +87,8 @@ void copie_grille (grille gs, grille gd){
 }
 
 extern inline int est_vivante(int i, int j, grille g);
+extern inline int est_nonvia(int i, int j, grille g);
 extern inline void set_vivante(int i, int j, grille g);
+extern inline void set_nonvia(int i, int j, grille g);
 extern inline void set_morte(int i, int j, grille g);
+
