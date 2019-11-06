@@ -22,4 +22,4 @@ clean:
 	rm *.o main
 
 dist:
-	tar -c doc/ grilles/ $(all) doxyfile Makefile -f daiyuquan-GoL-ver2.4.tar.xz -z
+	tar -c doc/ grilles/ $(all) doxyfile Makefile -f daiyuquan-GoL-ver2.5.tar.xz -z
