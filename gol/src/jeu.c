@@ -56,7 +56,7 @@ int compte_voisins_vivants_nc(int i, int j, grille g) {
  * @param vieillissement une cellule meurt de viellesse quand son âge dépasse 8 pas de temps
  */
 void evolue (grille *g, grille *gc, int (*compte_voisins_vivants)(int,int,grille),int vieillissement){
-	copie_grille (*g,*gc); // copie temporaire de la grille
+	copie_grille (g,gc); // copie temporaire de la grille
 	int i,j,l=g->nbl, c = g->nbc;
 	
 	for (i=0; i<l; i++)

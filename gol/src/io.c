@@ -168,6 +168,7 @@ void affiche_grille (grille g,char *modec,char *modev,int vieillissement){
 	affiche_cairo_text(20, 680, "Instruction:");
 	affiche_cairo_text(20, 710, "<clic gauche>---evoluer | <clic droite>---quitter");
 	affiche_cairo_text(20, 740, "<n>---New Game | <c>---(de)activer bord-cyclique | <v>---(de)activer vieillissement");
+	affiche_cairo_text(20, 770, "<o>---Tester Oscillation");
 
 	image_B = cairo_image_surface_create_from_png ("nice.png");
 	if(cairo_surface_status(image_B)!=CAIRO_STATUS_SUCCESS){
