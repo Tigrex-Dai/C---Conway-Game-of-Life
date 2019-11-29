@@ -1,0 +1,68 @@
+\hypertarget{main_8c}{}\section{Référence du fichier src/main.c}
+\label{main_8c}\index{src/main.\+c@{src/main.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$cairo.\+h$>$}\newline
+{\ttfamily \#include $<$cairo-\/xlib.\+h$>$}\newline
+{\ttfamily \#include $<$X11/\+Xlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}grille.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}io.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}jeu.\+h\char`\"{}}\newline
+Graphe des dépendances par inclusion de main.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{main_8c_ae9bcc946d2f7244fc47ae7cf4a513d8f}{joue} (char $\ast$fichier)
+\begin{DoxyCompactList}\small\item\em alloue quelques grilles avant executer le corp du jeu et les libere apres finir \end{DoxyCompactList}\item 
+int \hyperlink{main_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em prepare et execute le jeu \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+\begin{DoxyAuthor}{Auteur}
+D\+AI Yuquan 
+\end{DoxyAuthor}
+
+
+\subsection{Documentation des fonctions}
+\mbox{\Hypertarget{main_8c_ae9bcc946d2f7244fc47ae7cf4a513d8f}\label{main_8c_ae9bcc946d2f7244fc47ae7cf4a513d8f}} 
+\index{main.\+c@{main.\+c}!joue@{joue}}
+\index{joue@{joue}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{joue()}{joue()}}
+{\footnotesize\ttfamily void joue (\begin{DoxyParamCaption}\item[{char $\ast$}]{fichier }\end{DoxyParamCaption})}
+
+
+
+alloue quelques grilles avant executer le corp du jeu et les libere apres finir 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em fichier} & nom du fichier avec la grille \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{main_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{main.\+c@{main.\+c}!main@{main}}
+\index{main@{main}!main.\+c@{main.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+prepare et execute le jeu 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em argv} & repertoire du fichier avec la grille \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+1 si l\textquotesingle{}utilisateur n\textquotesingle{}a pas entre un fichier correcte, 0 si l\textquotesingle{}utilisateur fait un clic droite 
+\end{DoxyReturn}

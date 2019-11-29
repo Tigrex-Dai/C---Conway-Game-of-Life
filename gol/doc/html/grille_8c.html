@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Game of Life: Référence du fichier src/grille.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="nice.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Game of Life
+   &#160;<span id="projectnumber">v5.0.0</span>
+   </div>
+   <div id="projectbrief">Jeu de la Vie</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier grille.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;assert.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;cairo.h&gt;</code><br />
+<code>#include &lt;cairo-xlib.h&gt;</code><br />
+<code>#include &lt;X11/Xlib.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="grille_8h_source.html">grille.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de grille.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="grille_8c__incl.png" border="0" usemap="#src_2grille_8c" alt=""/></div>
+<map name="src_2grille_8c" id="src_2grille_8c">
+<area shape="rect" id="node10" href="grille_8h.html" title="Fichier entête du code source grille.c. " alt="" coords="167,80,227,107"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ae621f51c60aa4fafaa0c9f6c9b5a4036"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grille_8c.html#ae621f51c60aa4fafaa0c9f6c9b5a4036">alloue_grille</a> (int l, int c, <a class="el" href="structgrille.html">grille</a> *g)</td></tr>
+<tr class="memdesc:ae621f51c60aa4fafaa0c9f6c9b5a4036"><td class="mdescLeft">&#160;</td><td class="mdescRight">alloue une grille de taille l*c, et initialise toutes les cellules a mortes  <a href="#ae621f51c60aa4fafaa0c9f6c9b5a4036">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae621f51c60aa4fafaa0c9f6c9b5a4036"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7074b2b15576e9d2b3cd15c3a1dc7012"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grille_8c.html#a7074b2b15576e9d2b3cd15c3a1dc7012">libere_grille</a> (<a class="el" href="structgrille.html">grille</a> *g)</td></tr>
+<tr class="memdesc:a7074b2b15576e9d2b3cd15c3a1dc7012"><td class="mdescLeft">&#160;</td><td class="mdescRight">permet de liberer la memoire allouee pour les cellules  <a href="#a7074b2b15576e9d2b3cd15c3a1dc7012">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a7074b2b15576e9d2b3cd15c3a1dc7012"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac247d94af4c53fe64b28236f0a507bf0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grille_8c.html#ac247d94af4c53fe64b28236f0a507bf0">init_grille_from_file</a> (char const *const filename, <a class="el" href="structgrille.html">grille</a> *g)</td></tr>
+<tr class="memdesc:ac247d94af4c53fe64b28236f0a507bf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">init_grille_from_file alloue et initalise la grille g a partir d'un fichier  <a href="#ac247d94af4c53fe64b28236f0a507bf0">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac247d94af4c53fe64b28236f0a507bf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4562474d3f481fa7da7133925c37b99b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grille_8c.html#a4562474d3f481fa7da7133925c37b99b">copie_grille</a> (<a class="el" href="structgrille.html">grille</a> *<a class="el" href="grille_8c.html#a83c67db95a5b42df92b41f8fa9982502">gs</a>, <a class="el" href="structgrille.html">grille</a> *gd)</td></tr>
+<tr class="memdesc:a4562474d3f481fa7da7133925c37b99b"><td class="mdescLeft">&#160;</td><td class="mdescRight">copie_grille recopie gs dans gd  <a href="#a4562474d3f481fa7da7133925c37b99b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a4562474d3f481fa7da7133925c37b99b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af12c2156faaf6b18dd0ade10fbe629de"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grille_8c.html#af12c2156faaf6b18dd0ade10fbe629de">meme_grille</a> (<a class="el" href="structgrille.html">grille</a> *<a class="el" href="grille_8c.html#a83c67db95a5b42df92b41f8fa9982502">gs</a>, <a class="el" href="structgrille.html">grille</a> *gd)</td></tr>
+<tr class="memdesc:af12c2156faaf6b18dd0ade10fbe629de"><td class="mdescLeft">&#160;</td><td class="mdescRight">meme_grille test si gs et gd soit meme  <a href="#af12c2156faaf6b18dd0ade10fbe629de">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af12c2156faaf6b18dd0ade10fbe629de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a092a39783960ddbee5acc32c9b6864b5"><td class="memItemLeft" align="right" valign="top"><a id="a092a39783960ddbee5acc32c9b6864b5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>est_vivante</b> (int i, int j, <a class="el" href="structgrille.html">grille</a> g)</td></tr>
+<tr class="separator:a092a39783960ddbee5acc32c9b6864b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e49f2869c8721e998df4096674b950e"><td class="memItemLeft" align="right" valign="top"><a id="a3e49f2869c8721e998df4096674b950e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>est_nonvia</b> (int i, int j, <a class="el" href="structgrille.html">grille</a> g)</td></tr>
+<tr class="separator:a3e49f2869c8721e998df4096674b950e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0cbadbe963314bacd54c1a1ea511da7"><td class="memItemLeft" align="right" valign="top"><a id="ae0cbadbe963314bacd54c1a1ea511da7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_vivante</b> (int i, int j, <a class="el" href="structgrille.html">grille</a> g)</td></tr>
+<tr class="separator:ae0cbadbe963314bacd54c1a1ea511da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d327664dfff09d6528dce52687f0a15"><td class="memItemLeft" align="right" valign="top"><a id="a3d327664dfff09d6528dce52687f0a15"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_nonvia</b> (int i, int j, <a class="el" href="structgrille.html">grille</a> g)</td></tr>
+<tr class="separator:a3d327664dfff09d6528dce52687f0a15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c8e6e08e82824278fdf45a4a05dc85a"><td class="memItemLeft" align="right" valign="top"><a id="a3c8e6e08e82824278fdf45a4a05dc85a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_morte</b> (int i, int j, <a class="el" href="structgrille.html">grille</a> g)</td></tr>
+<tr class="separator:a3c8e6e08e82824278fdf45a4a05dc85a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a83c67db95a5b42df92b41f8fa9982502"><td class="memItemLeft" align="right" valign="top"><a id="a83c67db95a5b42df92b41f8fa9982502"></a>
+<a class="el" href="structgrille.html">grille</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grille_8c.html#a83c67db95a5b42df92b41f8fa9982502">gs</a></td></tr>
+<tr class="memdesc:a83c67db95a5b42df92b41f8fa9982502"><td class="mdescLeft">&#160;</td><td class="mdescRight">On definie global gs,gg ici. <br /></td></tr>
+<tr class="separator:a83c67db95a5b42df92b41f8fa9982502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5c92d5caaf5856349597ac5352eaf56"><td class="memItemLeft" align="right" valign="top"><a id="ac5c92d5caaf5856349597ac5352eaf56"></a>
+<a class="el" href="structgrille.html">grille</a>&#160;</td><td class="memItemRight" valign="bottom"><b>gg</b></td></tr>
+<tr class="separator:ac5c92d5caaf5856349597ac5352eaf56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><dl class="section author"><dt>Auteur</dt><dd>DAI Yuquan </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="ae621f51c60aa4fafaa0c9f6c9b5a4036"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae621f51c60aa4fafaa0c9f6c9b5a4036">&#9670;&nbsp;</a></span>alloue_grille()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void alloue_grille </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgrille.html">grille</a> *&#160;</td>
+          <td class="paramname"><em>g</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>alloue une grille de taille l*c, et initialise toutes les cellules a mortes </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>nombre de lignes </td></tr>
+    <tr><td class="paramname">c</td><td>nombre de colonnes </td></tr>
+    <tr><td class="paramname">g</td><td>grille </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4562474d3f481fa7da7133925c37b99b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4562474d3f481fa7da7133925c37b99b">&#9670;&nbsp;</a></span>copie_grille()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void copie_grille </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structgrille.html">grille</a> *&#160;</td>
+          <td class="paramname"><em>gs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgrille.html">grille</a> *&#160;</td>
+          <td class="paramname"><em>gd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>copie_grille recopie gs dans gd </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gs</td><td>grille </td></tr>
+    <tr><td class="paramname">gd</td><td>grille </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac247d94af4c53fe64b28236f0a507bf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac247d94af4c53fe64b28236f0a507bf0">&#9670;&nbsp;</a></span>init_grille_from_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_grille_from_file </td>
+          <td>(</td>
+          <td class="paramtype">char const *const&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgrille.html">grille</a> *&#160;</td>
+          <td class="paramname"><em>g</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>init_grille_from_file alloue et initalise la grille g a partir d'un fichier </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>nom du fichier a ouvrir </td></tr>
+    <tr><td class="paramname">g</td><td>grille </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7074b2b15576e9d2b3cd15c3a1dc7012"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7074b2b15576e9d2b3cd15c3a1dc7012">&#9670;&nbsp;</a></span>libere_grille()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void libere_grille </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structgrille.html">grille</a> *&#160;</td>
+          <td class="paramname"><em>g</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>permet de liberer la memoire allouee pour les cellules </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">g</td><td>grille </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af12c2156faaf6b18dd0ade10fbe629de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af12c2156faaf6b18dd0ade10fbe629de">&#9670;&nbsp;</a></span>meme_grille()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool meme_grille </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structgrille.html">grille</a> *&#160;</td>
+          <td class="paramname"><em>gs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgrille.html">grille</a> *&#160;</td>
+          <td class="paramname"><em>gd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>meme_grille test si gs et gd soit meme </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gs</td><td>grille </td></tr>
+    <tr><td class="paramname">gd</td><td>grille </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>test true ou false </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

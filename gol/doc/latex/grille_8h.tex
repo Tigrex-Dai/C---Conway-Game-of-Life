@@ -1,0 +1,168 @@
+\hypertarget{grille_8h}{}\section{Référence du fichier include/grille.h}
+\label{grille_8h}\index{include/grille.\+h@{include/grille.\+h}}
+
+
+Fichier entête du code source \hyperlink{grille_8c}{grille.\+c}.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+Graphe des dépendances par inclusion de grille.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{grille_8h__incl}
+\end{center}
+\end{figure}
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{grille_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structgrille}{grille}
+\begin{DoxyCompactList}\small\item\em structure grille\+: le type principal du jeu, qui contient informations sur le tableau de cellules \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{grille_8h_ae621f51c60aa4fafaa0c9f6c9b5a4036}{alloue\+\_\+grille} (int l, int c, \hyperlink{structgrille}{grille} $\ast$g)
+\begin{DoxyCompactList}\small\item\em alloue une grille de taille l$\ast$c, et initialise toutes les cellules a mortes \end{DoxyCompactList}\item 
+void \hyperlink{grille_8h_a7074b2b15576e9d2b3cd15c3a1dc7012}{libere\+\_\+grille} (\hyperlink{structgrille}{grille} $\ast$g)
+\begin{DoxyCompactList}\small\item\em permet de liberer la memoire allouee pour les cellules \end{DoxyCompactList}\item 
+void \hyperlink{grille_8h_ac247d94af4c53fe64b28236f0a507bf0}{init\+\_\+grille\+\_\+from\+\_\+file} (char const $\ast$const filename, \hyperlink{structgrille}{grille} $\ast$g)
+\begin{DoxyCompactList}\small\item\em init\+\_\+grille\+\_\+from\+\_\+file alloue et initalise la grille g a partir d\textquotesingle{}un fichier \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{grille_8h_ae0cbadbe963314bacd54c1a1ea511da7}\label{grille_8h_ae0cbadbe963314bacd54c1a1ea511da7}} 
+void {\bfseries set\+\_\+vivante} (int i, int j, \hyperlink{structgrille}{grille} g)
+\item 
+\mbox{\Hypertarget{grille_8h_a3d327664dfff09d6528dce52687f0a15}\label{grille_8h_a3d327664dfff09d6528dce52687f0a15}} 
+void {\bfseries set\+\_\+nonvia} (int i, int j, \hyperlink{structgrille}{grille} g)
+\item 
+\mbox{\Hypertarget{grille_8h_a3c8e6e08e82824278fdf45a4a05dc85a}\label{grille_8h_a3c8e6e08e82824278fdf45a4a05dc85a}} 
+void {\bfseries set\+\_\+morte} (int i, int j, \hyperlink{structgrille}{grille} g)
+\item 
+\mbox{\Hypertarget{grille_8h_a092a39783960ddbee5acc32c9b6864b5}\label{grille_8h_a092a39783960ddbee5acc32c9b6864b5}} 
+int {\bfseries est\+\_\+vivante} (int i, int j, \hyperlink{structgrille}{grille} g)
+\item 
+\mbox{\Hypertarget{grille_8h_a3e49f2869c8721e998df4096674b950e}\label{grille_8h_a3e49f2869c8721e998df4096674b950e}} 
+int {\bfseries est\+\_\+nonvia} (int i, int j, \hyperlink{structgrille}{grille} g)
+\item 
+void \hyperlink{grille_8h_a4562474d3f481fa7da7133925c37b99b}{copie\+\_\+grille} (\hyperlink{structgrille}{grille} $\ast$\hyperlink{grille_8c_a83c67db95a5b42df92b41f8fa9982502}{gs}, \hyperlink{structgrille}{grille} $\ast$gd)
+\begin{DoxyCompactList}\small\item\em copie\+\_\+grille recopie gs dans gd \end{DoxyCompactList}\item 
+bool \hyperlink{grille_8h_a464f547b118aa500440fd4aaa1191271}{meme\+\_\+grille} (\hyperlink{structgrille}{grille} $\ast$g1, \hyperlink{structgrille}{grille} $\ast$g2)
+\begin{DoxyCompactList}\small\item\em meme\+\_\+grille test si gs et gd soit meme \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{grille_8h_a83c67db95a5b42df92b41f8fa9982502}\label{grille_8h_a83c67db95a5b42df92b41f8fa9982502}} 
+\hyperlink{structgrille}{grille} \hyperlink{grille_8h_a83c67db95a5b42df92b41f8fa9982502}{gs}
+\begin{DoxyCompactList}\small\item\em On definie global gs,gg ici. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{grille_8h_ac5c92d5caaf5856349597ac5352eaf56}\label{grille_8h_ac5c92d5caaf5856349597ac5352eaf56}} 
+\hyperlink{structgrille}{grille} {\bfseries gg}
+\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Fichier entête du code source \hyperlink{grille_8c}{grille.\+c}. 
+
+\begin{DoxyAuthor}{Auteur}
+D\+AI Yuquan 
+\end{DoxyAuthor}
+
+
+\subsection{Documentation des fonctions}
+\mbox{\Hypertarget{grille_8h_ae621f51c60aa4fafaa0c9f6c9b5a4036}\label{grille_8h_ae621f51c60aa4fafaa0c9f6c9b5a4036}} 
+\index{grille.\+h@{grille.\+h}!alloue\+\_\+grille@{alloue\+\_\+grille}}
+\index{alloue\+\_\+grille@{alloue\+\_\+grille}!grille.\+h@{grille.\+h}}
+\subsubsection{\texorpdfstring{alloue\+\_\+grille()}{alloue\_grille()}}
+{\footnotesize\ttfamily void alloue\+\_\+grille (\begin{DoxyParamCaption}\item[{int}]{l,  }\item[{int}]{c,  }\item[{\hyperlink{structgrille}{grille} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+alloue une grille de taille l$\ast$c, et initialise toutes les cellules a mortes 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em l} & nombre de lignes \\
+\hline
+{\em c} & nombre de colonnes \\
+\hline
+{\em g} & grille \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{grille_8h_a4562474d3f481fa7da7133925c37b99b}\label{grille_8h_a4562474d3f481fa7da7133925c37b99b}} 
+\index{grille.\+h@{grille.\+h}!copie\+\_\+grille@{copie\+\_\+grille}}
+\index{copie\+\_\+grille@{copie\+\_\+grille}!grille.\+h@{grille.\+h}}
+\subsubsection{\texorpdfstring{copie\+\_\+grille()}{copie\_grille()}}
+{\footnotesize\ttfamily void copie\+\_\+grille (\begin{DoxyParamCaption}\item[{\hyperlink{structgrille}{grille} $\ast$}]{gs,  }\item[{\hyperlink{structgrille}{grille} $\ast$}]{gd }\end{DoxyParamCaption})}
+
+
+
+copie\+\_\+grille recopie gs dans gd 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em gs} & grille \\
+\hline
+{\em gd} & grille \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{grille_8h_ac247d94af4c53fe64b28236f0a507bf0}\label{grille_8h_ac247d94af4c53fe64b28236f0a507bf0}} 
+\index{grille.\+h@{grille.\+h}!init\+\_\+grille\+\_\+from\+\_\+file@{init\+\_\+grille\+\_\+from\+\_\+file}}
+\index{init\+\_\+grille\+\_\+from\+\_\+file@{init\+\_\+grille\+\_\+from\+\_\+file}!grille.\+h@{grille.\+h}}
+\subsubsection{\texorpdfstring{init\+\_\+grille\+\_\+from\+\_\+file()}{init\_grille\_from\_file()}}
+{\footnotesize\ttfamily void init\+\_\+grille\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{char const $\ast$const}]{filename,  }\item[{\hyperlink{structgrille}{grille} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+init\+\_\+grille\+\_\+from\+\_\+file alloue et initalise la grille g a partir d\textquotesingle{}un fichier 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em filename} & nom du fichier a ouvrir \\
+\hline
+{\em g} & grille \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{grille_8h_a7074b2b15576e9d2b3cd15c3a1dc7012}\label{grille_8h_a7074b2b15576e9d2b3cd15c3a1dc7012}} 
+\index{grille.\+h@{grille.\+h}!libere\+\_\+grille@{libere\+\_\+grille}}
+\index{libere\+\_\+grille@{libere\+\_\+grille}!grille.\+h@{grille.\+h}}
+\subsubsection{\texorpdfstring{libere\+\_\+grille()}{libere\_grille()}}
+{\footnotesize\ttfamily void libere\+\_\+grille (\begin{DoxyParamCaption}\item[{\hyperlink{structgrille}{grille} $\ast$}]{g }\end{DoxyParamCaption})}
+
+
+
+permet de liberer la memoire allouee pour les cellules 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em g} & grille \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{grille_8h_a464f547b118aa500440fd4aaa1191271}\label{grille_8h_a464f547b118aa500440fd4aaa1191271}} 
+\index{grille.\+h@{grille.\+h}!meme\+\_\+grille@{meme\+\_\+grille}}
+\index{meme\+\_\+grille@{meme\+\_\+grille}!grille.\+h@{grille.\+h}}
+\subsubsection{\texorpdfstring{meme\+\_\+grille()}{meme\_grille()}}
+{\footnotesize\ttfamily bool meme\+\_\+grille (\begin{DoxyParamCaption}\item[{\hyperlink{structgrille}{grille} $\ast$}]{gs,  }\item[{\hyperlink{structgrille}{grille} $\ast$}]{gd }\end{DoxyParamCaption})}
+
+
+
+meme\+\_\+grille test si gs et gd soit meme 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em gs} & grille \\
+\hline
+{\em gd} & grille \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+test true ou false 
+\end{DoxyReturn}

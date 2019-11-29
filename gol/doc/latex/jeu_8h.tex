@@ -1,0 +1,119 @@
+\hypertarget{jeu_8h}{}\section{Référence du fichier include/jeu.h}
+\label{jeu_8h}\index{include/jeu.\+h@{include/jeu.\+h}}
+
+
+Fichier entête du code source \hyperlink{jeu_8c}{jeu.\+c}.  
+
+
+{\ttfamily \#include \char`\"{}grille.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+Graphe des dépendances par inclusion de jeu.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{jeu_8h__incl}
+\end{center}
+\end{figure}
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier \+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{jeu_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{jeu_8h_ac6afabdc09a49a433ee19d8a9486056d}\label{jeu_8h_ac6afabdc09a49a433ee19d8a9486056d}} 
+\#define {\bfseries min}(a,  b)~((a) $<$ (b) ? (a) \+: (b))
+\item 
+\mbox{\Hypertarget{jeu_8h_affe776513b24d84b39af8ab0930fef7f}\label{jeu_8h_affe776513b24d84b39af8ab0930fef7f}} 
+\#define {\bfseries max}(a,  b)~((a) $>$ (b) ? (a) \+: (b))
+\end{DoxyCompactItemize}
+\subsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{jeu_8h_acc8422b6280ed6ef09f609683310de92}{compte\+\_\+voisins\+\_\+vivants\+\_\+c} (int i, int j, \hyperlink{structgrille}{grille} g)
+\begin{DoxyCompactList}\small\item\em compte le nombre de voisins vivants de la cellule (i,j) avec bords cycliques \end{DoxyCompactList}\item 
+int \hyperlink{jeu_8h_a22938221cd19d43dde7cd8fa18e9b3fd}{compte\+\_\+voisins\+\_\+vivants\+\_\+nc} (int i, int j, \hyperlink{structgrille}{grille} g)
+\begin{DoxyCompactList}\small\item\em compte le nombre de voisins vivants de la cellule (i,j) sans bords cycliques \end{DoxyCompactList}\item 
+void \hyperlink{jeu_8h_a0c11950a46b53162b21b35f8e36757fa}{evolue} (\hyperlink{structgrille}{grille} $\ast$g, \hyperlink{structgrille}{grille} $\ast$gc, int($\ast$compte\+\_\+voisins\+\_\+vivants)(int, int, \hyperlink{structgrille}{grille}), int vieillissement)
+\begin{DoxyCompactList}\small\item\em fait evoluer la grille g d\textquotesingle{}un pas de temps \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+Fichier entête du code source \hyperlink{jeu_8c}{jeu.\+c}. 
+
+\begin{DoxyAuthor}{Auteur}
+D\+AI Yuquan 
+\end{DoxyAuthor}
+
+
+\subsection{Documentation des fonctions}
+\mbox{\Hypertarget{jeu_8h_acc8422b6280ed6ef09f609683310de92}\label{jeu_8h_acc8422b6280ed6ef09f609683310de92}} 
+\index{jeu.\+h@{jeu.\+h}!compte\+\_\+voisins\+\_\+vivants\+\_\+c@{compte\+\_\+voisins\+\_\+vivants\+\_\+c}}
+\index{compte\+\_\+voisins\+\_\+vivants\+\_\+c@{compte\+\_\+voisins\+\_\+vivants\+\_\+c}!jeu.\+h@{jeu.\+h}}
+\subsubsection{\texorpdfstring{compte\+\_\+voisins\+\_\+vivants\+\_\+c()}{compte\_voisins\_vivants\_c()}}
+{\footnotesize\ttfamily int compte\+\_\+voisins\+\_\+vivants\+\_\+c (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j,  }\item[{\hyperlink{structgrille}{grille}}]{g }\end{DoxyParamCaption})}
+
+
+
+compte le nombre de voisins vivants de la cellule (i,j) avec bords cycliques 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em i} & position i \\
+\hline
+{\em j} & position j \\
+\hline
+{\em g} & grille \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+v le nombre de voisins vivants de la cellule (i, j) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{jeu_8h_a22938221cd19d43dde7cd8fa18e9b3fd}\label{jeu_8h_a22938221cd19d43dde7cd8fa18e9b3fd}} 
+\index{jeu.\+h@{jeu.\+h}!compte\+\_\+voisins\+\_\+vivants\+\_\+nc@{compte\+\_\+voisins\+\_\+vivants\+\_\+nc}}
+\index{compte\+\_\+voisins\+\_\+vivants\+\_\+nc@{compte\+\_\+voisins\+\_\+vivants\+\_\+nc}!jeu.\+h@{jeu.\+h}}
+\subsubsection{\texorpdfstring{compte\+\_\+voisins\+\_\+vivants\+\_\+nc()}{compte\_voisins\_vivants\_nc()}}
+{\footnotesize\ttfamily int compte\+\_\+voisins\+\_\+vivants\+\_\+nc (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j,  }\item[{\hyperlink{structgrille}{grille}}]{g }\end{DoxyParamCaption})}
+
+
+
+compte le nombre de voisins vivants de la cellule (i,j) sans bords cycliques 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em i} & position i \\
+\hline
+{\em j} & position j \\
+\hline
+{\em g} & grille \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+v le nombre de voisins vivants de la cellule (i, j) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{jeu_8h_a0c11950a46b53162b21b35f8e36757fa}\label{jeu_8h_a0c11950a46b53162b21b35f8e36757fa}} 
+\index{jeu.\+h@{jeu.\+h}!evolue@{evolue}}
+\index{evolue@{evolue}!jeu.\+h@{jeu.\+h}}
+\subsubsection{\texorpdfstring{evolue()}{evolue()}}
+{\footnotesize\ttfamily void evolue (\begin{DoxyParamCaption}\item[{\hyperlink{structgrille}{grille} $\ast$}]{g,  }\item[{\hyperlink{structgrille}{grille} $\ast$}]{gc,  }\item[{int($\ast$)(int, int, \hyperlink{structgrille}{grille})}]{compte\+\_\+voisins\+\_\+vivants,  }\item[{int}]{vieillissement }\end{DoxyParamCaption})}
+
+
+
+fait evoluer la grille g d\textquotesingle{}un pas de temps 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em g} & grille \\
+\hline
+{\em gc} & grille \\
+\hline
+{\em ($\ast$compte\+\_\+voisins\+\_\+vivants)(int,int,grille)} & pointeur vers une fonction \\
+\hline
+{\em vieillissement} & une cellule meurt de viellesse quand son âge dépasse 8 pas de temps \\
+\hline
+\end{DoxyParams}
