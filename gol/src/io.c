@@ -21,7 +21,8 @@ cairo_surface_t *CS;
 /** @brief la masque avec laquelle on affiche tout */
 cairo_t *CR;
 
-
+cairo_surface_t *image_B;
+cairo_t *image_dc_B;
 
 /**
  * @brief initialise l'ecran graphique
@@ -166,7 +167,17 @@ void affiche_grille (grille g,char *modec,char *modev,int vieillissement){
 	affiche_cairo_text(20, 710, "<clic gauche>---evoluer | <clic droite>---quitter");
 	affiche_cairo_text(20, 740, "<n>---New Game | <c>---(de)activer bord-cyclique | <v>---(de)activer vieillissement");
 
+	image_B = cairo_image_surface_create_from_png ("nice.png");
+	if(cairo_surface_status(image_B)!=CAIRO_STATUS_SUCCESS){
+		errx(1,"image unloaded");
+	}
+	image_dc_B = cairo_create(image_B);
 
+	cairo_set_source_surface(CR, image_B, 900, 700);
+	cairo_paint(CR);
+
+	cairo_destroy(image_dc_B);
+	cairo_surface_destroy(image_B);
         
 	for (i=0; i<l; i++) {
 		dessine_cairo_ligne(30, i * 50 + 50, c * 50 + 30, i * 50 + 50);
