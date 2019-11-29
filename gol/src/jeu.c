@@ -3,6 +3,9 @@
  * @author DAI Yuquan
  */
 
+#include <cairo.h>
+#include <cairo-xlib.h>
+#include <X11/Xlib.h>
 #include "jeu.h"
 
 /**

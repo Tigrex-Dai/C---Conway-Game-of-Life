@@ -3,145 +3,271 @@
  * @author DAI Yuquan
  */
 
+#include <cairo.h>
+#include <cairo-xlib.h>
+#include <X11/Xlib.h>
+#include <X11/keysymdef.h>
+#include <string.h>
+#include <stdlib.h>
+#include <X11/XKBlib.h>
 #include "io.h"
+#include "grille.h"
+
+// variables globales qui permettent de travailler avec l'ecran graphique
+/** @brief l'ecran graphique */
+Display *DPY;
+/** @brief liason avec l'ecran graphique par cairo */
+cairo_surface_t *CS;
+/** @brief la masque avec laquelle on affiche tout */
+cairo_t *CR;
+
+
 
 /**
- * @brief dessine une ligne de trait de cellules sur l'ecran
- * @param c nombres de cellules
+ * @brief initialise l'ecran graphique
  */
-void affiche_trait (int c){
-	int i;
-	for (i=0; i<c; ++i) printf ("|---");
-	printf("|\n");
-	return;
+void init_surface() {
+    Window rootwin;
+    Window win;
+    int scr;
+
+    // X11 display
+    if(!(DPY=XOpenDisplay(NULL))) {
+        fprintf(stderr, "ERROR: Could not open display\n");
+        exit(1);
+    }
+
+    scr=DefaultScreen(DPY);
+    rootwin=RootWindow(DPY, scr);
+
+    win=XCreateSimpleWindow(DPY, rootwin, 1, 1, SIZEX, SIZEY, 0, BlackPixel(DPY, scr), BlackPixel(DPY, scr));
+
+    XStoreName(DPY, win, "Jeu de la vie");
+    XSelectInput(DPY, win, ExposureMask|KeyPressMask|ButtonPressMask);
+    XMapWindow(DPY, win);
+
+    // create cairo surface
+    CS = cairo_xlib_surface_create(DPY, win, DefaultVisual(DPY, 0), SIZEX, SIZEY);
+    CR = cairo_create(CS);
+    oscplate = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, 0, 0);
+	oscplate_dc = cairo_create (oscplate);
+
+	
+    cairo_set_font_size(CR, 20);
+    cairo_select_font_face(CR, "Georgia", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
 }
 
 /**
- * @brief dessine une ligne de cellules sur l'ecran
- * @param c nombres de cellules
- * @param ligne nombres de lignes
+ * @brief affiche un string sur l'ecran graphique
+ * @param x coordone x
+ * @param y coordone y
+ * @param text le string qui sera afiche
+ */
+void affiche_cairo_text (int x, int y, char *text){
+    cairo_set_source_rgb(CR, 1, 0.847, 0.42);
+    cairo_move_to(CR, x, y);
+    cairo_show_text(CR, text);
+}
+
+/**
+ * @brief desine une ligne sur l'ecran graphique
+ * @param x1 coordonne x du premier point
+ * @param y1 coordonne y du premier point
+ * @param x2 coordonne x du second point
+ * @param y2 coordonne x du second point
+ */
+void dessine_cairo_ligne (int x1, int y1, int x2, int y2){
+    cairo_set_source_rgb(CR, 0.4, 0.7, 1);
+    cairo_move_to(CR, x1, y1);
+    cairo_line_to(CR, x2, y2);
+    cairo_set_line_width (CR, 5);
+    cairo_stroke (CR);
+}
+
+/**
+ * @brief affiche une cellule de la grille
+ * @param x coordonne x du point de debut de l'affichage
+ * @param y coordonne y du point de debut de l'affichage
+ * @param val valeur de la cellule
  * @param vieillissement si true, on montre l'ages des cellules et non si false
  */
-void affiche_ligne (int c, int* ligne, int vieillissement){
-	int i;
-	if (vieillissement)
-	{
-		 for (i=0; i<c; ++i) 
-			if (ligne[i] == 0 ) printf("|   ");
-			else if (ligne[i] == -1) printf("| X ");
-			else printf("| %d ",ligne[i]);
-		 printf("|\n");
+void affiche_cellule(int x, int y, int val,int vieillissement){
+	char symbol[10];
+	static char age[10];
+	sprintf(age, "%d",val);
+	if(vieillissement==1){
+		switch(val){
+			case 0:
+				strcpy(symbol, " ");
+				break;
+			case -1:
+				strcpy(symbol, "X");
+				break;
+			default:
+                strcpy(symbol, age);
+		 		break;
+		}
 	}
-	else
-	{
-		for (i=0; i<c; ++i) 
-			if (ligne[i] == 0 ) printf ("|   ");
-			else if (ligne[i] == -1) printf("| X ");
-			else printf ("| O ");
-		printf("|\n");
+	else{
+		switch(val){
+			case 0:
+				strcpy(symbol, " ");
+				break;
+			case -1:
+				strcpy(symbol, "X");
+				break;
+			default:
+               	strcpy(symbol, "O");
+		 		break;
+		}
 	}
-	return;
+    affiche_cairo_text(x, y, symbol);
+}
+
+/**
+ * @brief affiche une ligne de la grille sur l'ecran graphique
+ * @param x nombre d'elements de la ligne
+ * @param y nombre de la ligne
+ * @param ligne une ligne de la grille
+ * @param vieillissement si true, on montre l'ages des cellules et non si false
+ */
+void affiche_ligne (int x, int y, int* ligne,int vieillissement){
+	int i, j=0;
+	for (i=0; i<x; i++){
+        affiche_cellule(i * 50 + 50, y, ligne[i],vieillissement);
+        j++;
+    }
 }
 
 /**
  * @brief affiche la grille
  * @param g grille
+ * @param modec text pour circuler
+ * @param modev text pour vieillissement
  * @param vieillissement si true, on montre l'ages des cellules et non si false
  */
-void affiche_grille (grille g, int vieillissement){
+void affiche_grille (grille g,char *modec,char *modev,int vieillissement){
 	int i, l=g.nbl, c=g.nbc;
-	printf("Temps d'evolution : %d", temps_evolution);
-	printf("\n");
-	affiche_trait(c);
-	for (i=0; i<l; ++i) {
-		affiche_ligne(c, g.cellules[i],vieillissement);
-		affiche_trait(c);
-	}	
-	printf("\n"); 
-	printf("Enter---Evoluer | <q>---quitter\n");
-	printf("<n>---New Game | <c>---(de)activer bord-cyclique | <v>---(de)activer vieillissement\n");
-	printf("Entrez un des ces instructions----");
-	return;
+	char header[80];
+	static char str[10];
+	sprintf(str, "%d",temps_evolution);
+
+	cairo_set_source_rgb(CR, 0, 0, 0);
+	cairo_paint(CR);
+
+	strcpy(header, "Temps d'evolution: ");
+	strcat(header, str);
+	affiche_cairo_text(20, 30, header);
+	
+	affiche_cairo_text(300, 30, modec);
+	affiche_cairo_text(490, 30, modev);
+	
+	affiche_cairo_text(20, 680, "Instruction:");
+	affiche_cairo_text(20, 710, "<clic gauche>---evoluer | <clic droite>---quitter");
+	affiche_cairo_text(20, 740, "<n>---New Game | <c>---(de)activer bord-cyclique | <v>---(de)activer vieillissement");
+
+
+        
+	for (i=0; i<l; i++) {
+		dessine_cairo_ligne(30, i * 50 + 50, c * 50 + 30, i * 50 + 50);
+		affiche_ligne(c, i * 50 + 80, g.cellules[i],vieillissement);
+	}
+	dessine_cairo_ligne(30, i * 50 + 50, c * 50 + 30, i * 50 + 50);
+
+	for (i=30; i<=c*50; i+=50){
+		dessine_cairo_ligne(i, 50, i, l * 50 + 50);
+	}
+	dessine_cairo_ligne(i, 50, i, l * 50 + 50);
+	
+	
 }
 
-/**
- * @brief efface la grille
- * @param g grille
- */
-void efface_grille (grille g){
-	//printf("\n\e[%dA",g.nbl*2 + 5); 
-	printf("\033[2J");
-}
+
 
 /**
  * @brief debute le jeu
  * @param g grille
  * @param gc grille
  */
-void debut_jeu(grille *g, grille *gc){
+void debut_jeu(grille *g, grille *gc) {
 	int (*compte_voisins_vivants)(int,int,grille);
 	compte_voisins_vivants=compte_voisins_vivants_c;
-	
-	int vieillissement = 0;
-	
-	int c = getchar(); 
-	while (c != 'q') // touche 'q' pour quitter
-	{ 
-		switch (c) {
-			case '\n' : 
-			{ // touche "entree" pour évoluer
-				temps_evolution++;
-				evolue(g,gc,compte_voisins_vivants,vieillissement);
-				efface_grille(*g);
-				affiche_grille(*g,vieillissement);
-				break;
-			}
-			case 'n' :
-			{ // touche "n" pour renouveller grille
-				char grille[100];
-                printf("\r\e[0KNouvelle grille a charger : \n");
-                scanf("%s", grille);
+	int vieillissement=0;
+	char *modec="Cyclique: On";
+	char *modev="Vieillissement: Off";
 
-				libere_grille(g);
-				libere_grille(gc);
+	XEvent e;
+	
+	affiche_grille(*g,modec,modev,vieillissement);
 
-				init_grille_from_file(grille, g);
-				alloue_grille(g->nbl, g->nbc, gc);
+	while(1){
+		XNextEvent(DPY, &e);
+		
+		if (e.type == KeyPress){
+			switch (e.xkey.keycode){
+				case 54:{ // 'c'
+					if (compte_voisins_vivants == compte_voisins_vivants_c){
+						compte_voisins_vivants = compte_voisins_vivants_nc;
+						modec="Cyclique: Off";
+					}
+                    else{
+                        compte_voisins_vivants = compte_voisins_vivants_c;
+						modec="Cyclique: On";
+					}
+					affiche_grille(*g,modec,modev,vieillissement);
+                    break;
+                }
+                case 55:{ // 'v'
+					vieillissement += 1;
+					vieillissement %= 2;
+					if(vieillissement == 1){
+						modev="Vieillissement: On";
+					}
+					else{
+						modev="Vieillissement: Off";
+					}
+					affiche_grille(*g,modec,modev,vieillissement);
+                    break;
+                }
+                case 57:{ // 'n'
+                    char grille[100];
+                    printf("\r\e[0KNouvelle grille a charger : \n");
+                    scanf("%s", grille);
+
+                    libere_grille(g);
+                    libere_grille(gc);
+                    libere_grille(&gs);
+                    libere_grille(&gg);
+
+                    init_grille_from_file(grille, g);
+                    alloue_grille(g->nbl, g->nbc, gc);
+                    alloue_grille(g->nbl, g->nbc, &gs);
+                    alloue_grille(g->nbl, g->nbc, &gg);
+                    copie_grille(g,&gs);
                   
-				temps_evolution = 0;
-				affiche_grille(*g,vieillissement);
-				break;				
-			}
-			case 'c' :
-			{ // touch "c" pour (de)activer bord-cyclique
-				if (compte_voisins_vivants == compte_voisins_vivants_c){
-					compte_voisins_vivants = compte_voisins_vivants_nc;
-					//printf("\nBord est maintenant non-cyclique\n");
-				}
-                else{
-					compte_voisins_vivants = compte_voisins_vivants_c;
-					//printf("\nBord est maintenant cyclique\n");
-				}
+                    temps_evolution = 0;
+                    affiche_grille(*g,modec,modev,vieillissement);
+                    break;
+                }
+                
+            }
+        }
+        else if(e.type == ButtonPress){
+            if (e.xbutton.button == 1){ // clique
+                temps_evolution++;
+            	evolue(g,gc,compte_voisins_vivants,vieillissement);
+            	affiche_grille(*g,modec,modev,vieillissement);
+            }
+            else if(e.xbutton.button == 3){ // clique droit
+                cairo_surface_destroy(CS); // destroy cairo surface
+				XCloseDisplay(DPY); // close the display
                 break;
-			}
-			case 'v' :
-			{ // touche "v" pour (de)activer vieillissement
-				vieillissement += 1;
-				vieillissement %= 2;
-				efface_grille (*g);
-				affiche_grille (*g,vieillissement);
-				break;
-			}
-			default : 
-			{ // touche non traitée
-				//printf("\n\e[1A");
-				break;
-			}
-		}
-		c = getchar(); 
-	}
-	return;	
+            }
+		}        
+    }
+	return;
 }
+
 
 /** @brief on garde le temps d'evolution ici */
 int temps_evolution=0;

@@ -3,6 +3,15 @@
  * @author DAI Yuquan
  */
  
+#include <assert.h>
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <cairo.h>
+#include <cairo-xlib.h>
+#include <X11/Xlib.h> 
+ 
 #include "grille.h"
 
 /**
@@ -45,11 +54,13 @@ void libere_grille (grille *g) {
  * @param filename nom du fichier a ouvrir
  * @param g grille
  */
-void init_grille_from_file (char * filename, grille* g){
-	FILE * pfile = NULL;
-	pfile = fopen(filename, "r");
-	assert (pfile != NULL);
-	
+void init_grille_from_file(char const*const filename, grille *g) {
+	FILE *pfile = fopen(filename, "r");
+	if (pfile == NULL) {
+		fprintf(stderr,"Erreur (%s:%d): Lecture du fichier \"%s\" impossible (%s)\n", __FILE__, __LINE__ - 4, filename, strerror(errno));
+		exit(EXIT_FAILURE);
+	}
+
 	int i,j,n,l,c,vivantes,nonvias=0;
 	
 	fscanf(pfile, "%d", & l);
@@ -70,8 +81,8 @@ void init_grille_from_file (char * filename, grille* g){
 		fscanf(pfile, "%d", & j);
 		set_nonvia(i,j,*g);
 	}
-	
-	fclose (pfile);
+
+	fclose(pfile);
 	return;
 }
 
@@ -80,11 +91,34 @@ void init_grille_from_file (char * filename, grille* g){
  * @param gs grille
  * @param gd grille
  */
-void copie_grille (grille gs, grille gd){
+void copie_grille (grille *gs, grille *gd){
+	assert(gs->nbl == gd->nbl && gs->nbc == gd->nbc);
 	int i, j;
-	for (i=0; i<gs.nbl; ++i) for (j=0; j<gs.nbc; ++j) gd.cellules[i][j] = gs.cellules[i][j];
-	return;	
+	for (i=0; i<gs->nbl; ++i) for (j=0; j<gs->nbc; ++j) gd->cellules[i][j] = gs->cellules[i][j];
 }
+
+/**
+ * @brief meme_grille test si gs et gd soit meme
+ * @param gs grille
+ * @param gd grille
+ * @return test true ou false
+ */
+bool meme_grille(grille *gs, grille *gd){
+	assert(gs->nbl == gd->nbl && gs->nbc == gd->nbc);
+	bool test = 1;
+	for (int i = 0; i < gs->nbl; ++i){
+		for (int j = 0; j < gs->nbc; ++j){
+			if(gd->cellules[i][j] != gs->cellules[i][j]){
+				test = !test;
+				break;
+			}
+		}
+	}
+	return test;
+}
+
+/** @brief On definie global gs,gg ici */
+grille gs,gg;
 
 extern inline int est_vivante(int i, int j, grille g);
 extern inline int est_nonvia(int i, int j, grille g);

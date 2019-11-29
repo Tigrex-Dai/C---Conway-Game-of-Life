@@ -6,26 +6,55 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-
+#include <cairo.h>
+#include <cairo-xlib.h>
+#include <X11/Xlib.h>
 #include "grille.h"
 #include "io.h"
 #include "jeu.h"
 
-/**
- * @brief execute le jeu
- * @param argv repertoire du fichier avec la grille
- * @return 0 si l'utilisateur a appuye sur 'q'
- */
 
-int main (int argc, char ** argv) {
+/**
+ * @brief alloue quelques grilles avant executer le corp du jeu et les libere apres finir
+ * @param fichier nom du fichier avec la grille
+ */
+void joue (char *fichier){
+
+	grille g, gc;
+
+	init_surface();
+     
+	init_grille_from_file(fichier, &g);
+	alloue_grille (g.nbl, g.nbc, &gc);
+	alloue_grille (g.nbl, g.nbc, &gs);
+	alloue_grille (g.nbl, g.nbc, &gg);
+	copie_grille(&g,&gs);
 	
-	if (argc != 2 )
+	debut_jeu(&g, &gc);
+	libere_grille(&g);
+	libere_grille(&gc);
+	libere_grille(&gs);
+	libere_grille(&gg);
+	return;
+}
+
+/**
+ * @brief prepare et execute le jeu
+ * @param argv repertoire du fichier avec la grille
+ * @return 1 si l'utilisateur n'a pas entre un fichier correcte,
+           0 si l'utilisateur fait un clic droite
+ */
+int main(int argc, char **argv) {
+    if (argc != 2 )
 	{
 		printf("usage : main <fichier grille>\n");
 		return 1;
 	}
-	int usleep(useconds_t usec);
+
+	char *fichier;
+	fichier = argv[1];
 	
+	int usleep(useconds_t usec);
 	char begin[] = {"Survie du plus apte... C'est le jeu de la vie."};
 	for(int i = 0;begin[i]!='\0';i++)
 	{
@@ -33,17 +62,9 @@ int main (int argc, char ** argv) {
 		fflush(stdout);
 		usleep(50000);
 	}
-	usleep(150000);
+	usleep(300000);
 	printf("\n");
+	joue (fichier);
 
-	grille g, gc;
-	init_grille_from_file(argv[1],&g);
-	alloue_grille (g.nbl, g.nbc, &gc);
-	affiche_grille(g,0);
-	
-	debut_jeu(&g, &gc);
-
-	libere_grille(&g);
-	libere_grille(&gc);
-	return 0;
+    return 0;
 }

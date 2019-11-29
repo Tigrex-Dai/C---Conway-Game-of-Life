@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
+#include <stdbool.h>
 
 // structure grille : nombre de lignes, nombre de colonnes, tableau de tableau de cellules
 /**
@@ -21,6 +22,9 @@ typedef struct {
 	int** cellules;/**< tableau de tableau de cellules */
 	} grille;
 
+//declarer 2 grilles, gs pour garder grille initiale et gg pour garder grille temporaire
+extern grille gs,gg;
+
 // alloue une grille de taille l*c, et initialise toutes les cellules à mortes
 void alloue_grille (int l, int c, grille* g);
 
@@ -28,7 +32,7 @@ void alloue_grille (int l, int c, grille* g);
 void libere_grille (grille* g);
 
 // alloue et initalise la grille g à partir d'un fichier
-void init_grille_from_file (char * filename, grille* g);
+void init_grille_from_file (char const*const filename, grille* g);
 
 // rend vivante la cellule (i,j) de la grille g
 inline void set_vivante(int i, int j, grille g){g.cellules[i][j] = 1;}
@@ -42,6 +46,9 @@ inline int est_vivante(int i, int j, grille g){return g.cellules[i][j] >= 1;}
 inline int est_nonvia(int i, int j, grille g){return g.cellules[i][j] == -1;}
 
 // recopie gs dans gd (sans allocation)
-void copie_grille (grille gs, grille gd);
+void copie_grille (grille *gs, grille *gd);
+
+// teste si deux grilles sont meme
+bool meme_grille(grille *g1, grille *g2);
 
 #endif
