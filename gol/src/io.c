@@ -23,6 +23,8 @@ cairo_t *CR;
 
 cairo_surface_t *image_B;
 cairo_t *image_dc_B;
+cairo_surface_t *oscplate;
+cairo_t *oscplate_dc;
 
 /**
  * @brief initialise l'ecran graphique
@@ -193,7 +195,53 @@ void affiche_grille (grille g,char *modec,char *modev,int vieillissement){
 	
 }
 
+/**
+ * @brief test si les cellules sont oscillantes
+ * @param g grille
+ * @param gc grille pour evoluer
+ */
+void affiche_osc (grille *g, grille *gc){
+	int (*compte_voisins_vivants)(int,int,grille);
+	compte_voisins_vivants=compte_voisins_vivants_c;
+	int peri = 1;
+	bool i=1;
 
+	
+	char osc[80];
+	static char oscp[10];
+	
+	copie_grille(g,&gg);
+	copie_grille(&gs,g);
+	
+	evolue(g,gc,compte_voisins_vivants,0);
+	while(meme_grille(g,&gs)==0){
+		evolue(g,gc,compte_voisins_vivants,0);
+		peri++;
+		if(peri==100){
+			i=0;
+			break;
+		}
+	
+	}
+	if(i==0){
+		affiche_cairo_text(20,630,"Cette colonie n'est pas oscillante.");
+	}
+	else{
+		sprintf(oscp, "%d",peri);
+		strcpy(osc, "C'est une colonie oscillante. Periode: ");
+		strcat(osc, oscp);
+		affiche_cairo_text(20, 630, osc);
+	}
+	
+	cairo_paint(oscplate_dc);
+	cairo_set_source_surface(CR, oscplate, 0, 0);
+
+	cairo_destroy(oscplate_dc);
+	cairo_surface_destroy(oscplate);
+	
+	copie_grille(&gg,g);
+	
+}
 
 /**
  * @brief debute le jeu
@@ -260,7 +308,10 @@ void debut_jeu(grille *g, grille *gc) {
                     affiche_grille(*g,modec,modev,vieillissement);
                     break;
                 }
-                
+                case 32:{ // 'o'
+					affiche_osc(g,gc);
+					affiche_grille(*g,modec,modev,vieillissement);						
+				}
             }
         }
         else if(e.type == ButtonPress){

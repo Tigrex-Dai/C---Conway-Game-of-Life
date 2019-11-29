@@ -48,6 +48,8 @@ void dessine_cairo_ligne (int x1, int y1, int x2, int y2);
 //affichage une partie de grille (cellule) utilisant cairo
 void affiche_cellule(int x, int y, int val,int vieillissement);
 
+//teste d'oscillance
+void affiche_osc (grille *g, grille *gc);
 
 // debute le jeu
 void debut_jeu(grille *g, grille *gc);

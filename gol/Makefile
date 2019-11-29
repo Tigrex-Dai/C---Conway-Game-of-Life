@@ -23,7 +23,7 @@ endif
 
 OBJPATH=$(ROOT_DIR)obj/
 BINPATH=$(ROOT_DIR)bin/
-
+LIBPATH=$(ROOT_DIR)lib/
 
 vpath %.h $(ROOT_DIR)include/
 vpath %.c $(ROOT_DIR)src/
@@ -33,7 +33,10 @@ all: $(BINPATH)lavie
 
 $(BINPATH)lavie : $(addprefix $(OBJPATH), main.o grille.o io.o jeu.o ) | $(BINPATH)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS) $(IFLAGS)
-
+	ar -rcs libjeu.a $^
+	mkdir -p $(LIBPATH)
+	@cp libjeu.a $(LIBPATH)
+	@rm libjeu.a
 
 $(OBJPATH)main.o : main.c grille.h io.h jeu.h
 $(OBJPATH)grille.o : grille.c grille.h
@@ -50,13 +53,14 @@ $(OBJPATH):
 $(BINPATH) :
 	mkdir -p $(BINPATH)
 	cp nice.png $(BINPATH)
+	
 
 check: $(BINPATH)lavie
 	@./test/test_gol_execution.sh 
 
 clean:
-	@rm -rf lavie *.o $(BINPATH) $(OBJPATH)
+	@rm -rf lavie *.o $(LIBPATH) $(BINPATH) $(OBJPATH)
 	@echo Clean!
 
 dist:
-	tar -c grilles/ include/ src/ Makefile test/ text_mode/ -f daiyuquan-GoL-ver2.5.tar.xz -z
+	tar -c doc/ grilles/ include/ src/ lib/ Makefile test/ text_mode/ Doxyfile -f daiyuquan-GoL-ver2.5.tar.xz -z
