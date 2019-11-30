@@ -59,8 +59,8 @@ check: $(BINPATH)lavie
 	@./test/test_gol_execution.sh 
 
 clean:
-	@rm -rf lavie *.o $(LIBPATH) $(BINPATH) $(OBJPATH)
+	@rm -rf lavie *.o $(BINPATH) $(OBJPATH)
 	@echo Clean!
 
 dist:
-	tar -c doc/ grilles/ include/ src/ lib/ Makefile test/ text_mode/ Doxyfile -f daiyuquan-GoL-ver2.5.tar.xz -z
+	tar -c doc/ grilles/ include/ src/ lib/ Makefile nice.png test/ text_mode/ Doxyfile -f daiyuquan-GoL-ver5.6.tar.xz -z
