@@ -10,3 +10,9 @@
 	
 	J'ai rencontré un problème de "rendering" et ça me donne un écran noir au début. Mais c'est rien de grave car vous pouvez double presse <c> pour le résoudre.
 	Ce problème peut apparaitre de temps en temps^ ^
+
+
+## Petite introduction:
+
+	C'est le jeu de la vie, un jeu très populaire. Il simule le processus des cellules, evoluant et mourant...
+	Les blocs jaunes sont les cellules vivantes et les blocs rouges représentes les places non-viables.

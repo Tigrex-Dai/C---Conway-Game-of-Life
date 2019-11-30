@@ -59,40 +59,33 @@ void evolue (grille *g, grille *gc, int (*compte_voisins_vivants)(int,int,grille
 	copie_grille (g,gc); // copie temporaire de la grille
 	int i,j,l=g->nbl, c = g->nbc;
 	
-	for (i=0; i<l; i++)
-	{
-		for (j=0; j<c; ++j)
-		{			
-			if (est_vivante(i,j,*g)) 
-			{ // evolution d'une cellule vivante
+	for (i=0; i<l; i++){
+		for (j=0; j<c; ++j){			
+			if (est_vivante(i,j,*g)) { // evolution d'une cellule vivante
 				switch (vieillissement){
 					case 1 : {
-						if ( (compte_voisins_vivants(i,j,*gc)!=2 && compte_voisins_vivants(i,j,*gc)!= 3) || g->cellules[i][j] >=8 )
-						{
-							if (!est_nonvia(i,j,*g)) set_morte(i,j,*g);						
+						if ( (compte_voisins_vivants(i,j,*gc)!=2 && compte_voisins_vivants(i,j,*gc)!= 3) || g->cellules[i][j] >=8 ){
+							set_morte(i,j,*g);						
 						}
-						else
-						{
-							if (!est_nonvia(i,j,*g)) g->cellules[i][j]++;		
+						else{
+							g->cellules[i][j]++;		
 						}
 						break;
 					}
 					case 0 : {
-						if ( compte_voisins_vivants(i,j,*gc)!=2 && compte_voisins_vivants(i,j,*gc)!= 3 )
-						{
-							if (!est_nonvia(i,j,*g)) set_morte(i,j,*g);
+						if ( compte_voisins_vivants(i,j,*gc)!=2 && compte_voisins_vivants(i,j,*gc)!= 3 ){
+							set_morte(i,j,*g);
 						}
-						else
-						{
-							if (!est_nonvia(i,j,*g)) g->cellules[i][j]++;		
+						else{
+							g->cellules[i][j]++;		
 						}
 						break;
 					}
 				}
 			}
-			else 
-			{ // evolution d'une cellule morte
-				if ( (compte_voisins_vivants(i,j,*gc)==3) && (!est_nonvia(i,j,*g))) set_vivante(i,j,*g);
+			else if(est_nonvia(i,j,*g)){}
+			else{ // evolution d'une cellule morte
+				if (compte_voisins_vivants(i,j,*gc)==3) set_vivante(i,j,*g);
 			}
 		}
 	}

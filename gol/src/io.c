@@ -21,6 +21,8 @@ cairo_surface_t *CS;
 /** @brief la masque avec laquelle on affiche tout */
 cairo_t *CR;
 
+cairo_pattern_t *pat;
+
 cairo_surface_t *image_B;
 cairo_t *image_dc_B;
 cairo_surface_t *oscplate;
@@ -95,33 +97,57 @@ void affiche_cellule(int x, int y, int val,int vieillissement){
 	char symbol[10];
 	static char age[10];
 	sprintf(age, "%d",val);
+	pat = cairo_pattern_create_radial (x-19, y-29, 2.5, x-14, y-24, 30);
+	cairo_pattern_add_color_stop_rgba (pat, 0, 1, 1, 1, 1);
+	
+	
 	if(vieillissement==1){
 		switch(val){
 			case 0:
-				strcpy(symbol, " ");
+				//strcpy(symbol, " ");
 				break;
 			case -1:
-				strcpy(symbol, "X");
+				cairo_pattern_add_color_stop_rgba (pat, 1, 0.8, 0, 0, 1);
+				cairo_set_source (CR, pat);
+				cairo_rectangle (CR, x-20, y-27.5, 50, 45);
+				cairo_fill (CR);
+				cairo_pattern_destroy (pat);
+				//strcpy(symbol, "X");
 				break;
 			default:
+				cairo_pattern_add_color_stop_rgba (pat, 1, 0.5, 0.423, 0.21, 1);
+				cairo_set_source (CR, pat);
+				cairo_rectangle (CR, x-20, y-27.5, 50, 45);
+				cairo_fill (CR);
+				cairo_pattern_destroy (pat);
                 strcpy(symbol, age);
+                affiche_cairo_text(x-2, y+2, symbol);
 		 		break;
 		}
 	}
 	else{
 		switch(val){
 			case 0:
-				strcpy(symbol, " ");
+				//strcpy(symbol, " ");
 				break;
 			case -1:
-				strcpy(symbol, "X");
+				cairo_pattern_add_color_stop_rgba (pat, 1, 0.8, 0, 0, 1);
+				cairo_set_source (CR, pat);
+				cairo_rectangle (CR, x-20, y-27.5, 50, 45);
+				cairo_fill (CR);
+				cairo_pattern_destroy (pat);
+				//strcpy(symbol, "X");
 				break;
 			default:
-               	strcpy(symbol, "O");
+				cairo_pattern_add_color_stop_rgba (pat, 1, 1, 0.847, 0.42, 1);
+				cairo_set_source (CR, pat);
+				cairo_rectangle (CR, x-20, y-27.5, 50, 45);
+				cairo_fill (CR);
+				cairo_pattern_destroy (pat);
+               	//strcpy(symbol, "O");
 		 		break;
 		}
 	}
-    affiche_cairo_text(x, y, symbol);
 }
 
 /**
@@ -162,10 +188,11 @@ void affiche_grille (grille g,char *modec,char *modev,int vieillissement){
 	affiche_cairo_text(300, 30, modec);
 	affiche_cairo_text(490, 30, modev);
 	
-	affiche_cairo_text(20, 680, "Instruction:");
-	affiche_cairo_text(20, 710, "<clic gauche>---evoluer | <clic droite>---quitter");
-	affiche_cairo_text(20, 740, "<n>---New Game | <c>---(de)activer bord-cyclique | <v>---(de)activer vieillissement");
-	affiche_cairo_text(20, 770, "<o>---Tester Oscillation");
+	affiche_cairo_text(20, 650, "Instruction:");
+	affiche_cairo_text(20, 680, "<n>---New Game");
+	affiche_cairo_text(20, 710, "<o>---Tester Oscillation");
+	affiche_cairo_text(20, 740, "<clic gauche>---evoluer | <clic droite>---quitter");
+	affiche_cairo_text(20, 770, "<c>---(de)activer bord-cyclique | <v>---(de)activer vieillissement");
 
 	image_B = cairo_image_surface_create_from_png ("nice.png");
 	if(cairo_surface_status(image_B)!=CAIRO_STATUS_SUCCESS){
@@ -173,7 +200,7 @@ void affiche_grille (grille g,char *modec,char *modev,int vieillissement){
 	}
 	image_dc_B = cairo_create(image_B);
 
-	cairo_set_source_surface(CR, image_B, 900, 700);
+	cairo_set_source_surface(CR, image_B, 750, 570);
 	cairo_paint(CR);
 
 	cairo_destroy(image_dc_B);
@@ -222,13 +249,13 @@ void affiche_osc (grille *g, grille *gc){
 	
 	}
 	if(i==0){
-		affiche_cairo_text(20,630,"Cette colonie n'est pas oscillante.");
+		affiche_cairo_text(20, 600, "Cette colonie n'est pas oscillante.");
 	}
 	else{
 		sprintf(oscp, "%d",peri);
 		strcpy(osc, "C'est une colonie oscillante. Periode: ");
 		strcat(osc, oscp);
-		affiche_cairo_text(20, 630, osc);
+		affiche_cairo_text(20, 600, osc);
 	}
 	oscplate = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, 0, 0);
 	oscplate_dc = cairo_create (oscplate);
