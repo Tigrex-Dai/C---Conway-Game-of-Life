@@ -11,13 +11,13 @@ ifeq (${MODE},TEXTE)
 ROOT_DIR = text_mode/
 CFLAGS += -Wall -Wextra 
 LDLIBS += -lm
-CPPFLAGS += -I include
+CPPFLAGS += -I $(ROOT_DIR)include
 IFLAGS =
 else
 ROOT_DIR = 
 CFLAGS += -Wall -Wextra -g -O0
 LDLIBS += -lcairo -lm -lX11
-CPPFLAGS += -I include 
+CPPFLAGS += -I $(ROOT_DIR)include 
 IFLAGS += -I/usr/include/cairo
 endif
 

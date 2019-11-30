@@ -52,9 +52,6 @@ void init_surface() {
     // create cairo surface
     CS = cairo_xlib_surface_create(DPY, win, DefaultVisual(DPY, 0), SIZEX, SIZEY);
     CR = cairo_create(CS);
-    oscplate = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, 0, 0);
-	oscplate_dc = cairo_create (oscplate);
-
 	
     cairo_set_font_size(CR, 20);
     cairo_select_font_face(CR, "Georgia", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
@@ -233,9 +230,12 @@ void affiche_osc (grille *g, grille *gc){
 		strcat(osc, oscp);
 		affiche_cairo_text(20, 630, osc);
 	}
+	oscplate = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, 0, 0);
+	oscplate_dc = cairo_create (oscplate);
 	
 	cairo_paint(oscplate_dc);
 	cairo_set_source_surface(CR, oscplate, 0, 0);
+	cairo_paint(CR);
 
 	cairo_destroy(oscplate_dc);
 	cairo_surface_destroy(oscplate);
@@ -310,8 +310,7 @@ void debut_jeu(grille *g, grille *gc) {
                     break;
                 }
                 case 32:{ // 'o'
-					affiche_osc(g,gc);
-					affiche_grille(*g,modec,modev,vieillissement);						
+					affiche_osc(g,gc);				
 				}
             }
         }

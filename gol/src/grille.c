@@ -108,10 +108,12 @@ bool meme_grille(grille *gs, grille *gd){
 	bool test = 1;
 	for (int i = 0; i < gs->nbl; ++i){
 		for (int j = 0; j < gs->nbc; ++j){
-			if(gd->cellules[i][j] != gs->cellules[i][j]){
-				test = !test;
-				break;
+			if(est_vivante(i,j,*gd)!=est_vivante(i,j,*gs)){
+				test = 0;
 			}
+		}
+		if(test==0){
+			break;
 		}
 	}
 	return test;
