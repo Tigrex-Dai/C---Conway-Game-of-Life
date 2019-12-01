@@ -16,3 +16,8 @@
 
 	C'est le jeu de la vie, un jeu très populaire. Il simule le processus des cellules, evoluant et mourant...
 	Les blocs jaunes sont les cellules vivantes et les blocs rouges représentes les places non-viables.
+
+## Versionnement de Tag
+    
+    v1.x correspond à processus de Niveau 1, v2.x Niveau 2, etc.
+    Nom de tag simplement explique ce que j'ai ajouté/modifié, etc.
