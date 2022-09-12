@@ -1,3 +1,29 @@
+## Building instructions:
+
+	1."make" allows you to build the "Cairo" version which runs in a separate new window.
+
+	2."make MODE=TEXT" lets you build the classic version that runs in a terminal.
+
+	3."make dist" allows you to create a .tar file containing all the necessary files.
+
+## Execution note:
+
+	I ran into a "rendering" problem and it gives me a black screen at first. But it's nothing serious because you can double press <c> to solve it.
+	This problem may appear from time to time ^^
+
+
+## Short intro:
+
+	It's the game of life, a very popular game. It simulates the process of cells, evolving and dying...
+	The yellow blocks are living cells and the red blocks represent non-viable places.
+
+## Tag versioning
+    
+     v1.x corresponds to Level 1 process, v2.x Level 2, etc.
+     Tag name simply explains what I added/changed etc.
+
+
+
 ## Instructions de construction:
 
 	1."make" vous permet de construire la version "Cairo" qui s'exécute dans une nouvelle fenêtre séparée.
