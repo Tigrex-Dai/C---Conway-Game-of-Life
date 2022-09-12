@@ -1,3 +1,5 @@
+#EN:
+
 ## Building instructions:
 
 	1."make" allows you to build the "Cairo" version which runs in a separate new window.
@@ -23,6 +25,7 @@
      Tag name simply explains what I added/changed etc.
 
 
+#FR
 
 ## Instructions de construction:
 
